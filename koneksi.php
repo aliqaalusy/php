@@ -1,14 +1,10 @@
 <?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-$host = "mysql.railway.internal";
-$user = "root";
-$pass = "LZstNchgUtUIzpLIpzjvtJVusCMZscPX"; // Sesuaikan dengan MYSQL_ROOT_PASSWORD di gambar
-$db   = "railway";
-$port = 3306;
+// Railway menyediakan variabel ini secara otomatis
+$host = getenv('MYSQLHOST') ?: "mysql.railway.internal";
+$user = getenv('MYSQLUSER') ?: "root";
+$pass = getenv('MYSQLPASSWORD') ?: "LZstNchgUtUIzpLIpzjvtJVusCMZscPX";
+$db   = getenv('MYSQLDATABASE') ?: "railway";
+$port = getenv('MYSQLPORT') ?: 3306;
 
 $koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
