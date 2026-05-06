@@ -1,14 +1,16 @@
 <?php
-// Railway menyediakan variabel ini secara otomatis
-$host = getenv('MYSQLHOST') ?: "mysql.railway.internal";
-$user = getenv('MYSQLUSER') ?: "root";
-$pass = getenv('MYSQLPASSWORD') ?: "LZstNchgUtUIzpLIpzjvtJVusCMZscPX";
-$db   = getenv('MYSQLDATABASE') ?: "railway";
+// Mengambil data dari environment variables Railway
+$host = getenv('MYSQLHOST') ?: 'mysql.railway.internal';
+$user = getenv('MYSQLUSER') ?: 'root';
+$pass = getenv('MYSQLPASSWORD') ?: 'LZstNChgUtUIzpLIpzjVtJVusCMZscPX';
+$db   = getenv('MYSQLDATABASE') ?: 'railway';
 $port = getenv('MYSQLPORT') ?: 3306;
 
+// Melakukan koneksi
 $koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
+// Cek koneksi
 if (!$koneksi) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+    die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 ?>
