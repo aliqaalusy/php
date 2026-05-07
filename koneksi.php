@@ -2,18 +2,21 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$host = getenv('MYSQLHOST') ?: "mysql.railway.internal";
-$user = getenv('MYSQLUSER') ?: "root";
-$pass = getenv('MYSQLPASSWORD') ?: "FpRyRxbKkolFOfuLgOhEDrgrCdsDupvl";
-$db   = getenv('MYSQLDATABASE') ?: "railway";
-$port = getenv('MYSQLPORT') ?: 3306;
+$host = $_ENV['MYSQLHOST'] ?? getenv('mysql.railway.internal');
+$user = $_ENV['MYSQLUSER'] ?? getenv('root');
+$pass = $_ENV['MYSQLPASSWORD'] ?? getenv('FpRyRxbKkolFOfuLgOhEDrgrCdsDupvl');
+$db   = $_ENV['MYSQLDATABASE'] ?? getenv('railway');
+$port = $_ENV['MYSQLPORT'] ?? getenv('3306');
+
+if (!$host || !$user || !$db) {
+    die("Environment variable database belum terbaca!");
+}
 
 $koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
 if (!$koneksi) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+    die("Koneksi gagal: " . mysqli_connect_error());
 }
 
-// 5. Pesan Sukses (Opsional - hapus jika sudah berhasil konek)
-// echo "Koneksi Berhasil Terhubung!";
+echo "Koneksi database berhasil!";
 ?>
